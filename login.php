@@ -4,7 +4,7 @@
 $host = "localhost"; // Cambia esto al host de tu base de datos
 $usuario = "root"; // Cambia esto a tu nombre de usuario de la base de datos
 $pass = ""; // Cambia esto a tu contraseña de la base de datos
-$db = "garaje "; 
+$dbn= "garaje"; 
 
 // Establecer conexión a la base de datos
 $cone = new mysqli($host, $usuario, $pass, $db);
@@ -13,6 +13,7 @@ $cone = new mysqli($host, $usuario, $pass, $db);
 if ($cone->connect_error) {
     die("Error de conexión  " . $cone->connect_error);
 }
+
 
 // Recuperar datos del formulario de inicio de sesión
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -25,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($resultado->num_rows == 1) {
         // Inicio de sesión exitoso, redireccionar a la página de inicio
-        header("Location: inicio.php");
+        header("Location: inicio");
     } else {
         // Credenciales incorrectas, mostrar un mensaje de error
         echo "Credenciales incorrectas. Inténtalo de nuevo.";
@@ -35,3 +36,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Cerrar la conexión a la base de datos
 $cone->close();
 ?>
+
