@@ -3,14 +3,14 @@
 $host = "localhost"; 
 $usuario = "root"; 
 $contrasena = ""; 
-$bd = " "; // Cambia esto al nombre de tu base de datos
+$bd = "garaje"; // Cambia esto al nombre de tu base de datos
 
 // Establecer conexión a la base de datos
-$cone = new mysqli($host, $usuario, $contrasena, $base_de_datos);
+$cone = new mysqli($host, $usuario, $contrasena, $bd);
 
 // Verificar la conexión
 if ($cone->connect_error) {
-    die("Error de conexión a la base de datos: " . $cone->connect_error);
+    die("Error de conexión  " . $cone->connect_error);
 }
 
 // Recuperar datos del formulario de registro
@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST["nombre"];
     $apellido = $_POST["apellido"];
     $email = $_POST["email"];
-    $password = $_POST["contraseña"];
+    $password = $_POST["password"];
 
     // Hash de la contraseña (debes mejorar esto con una técnica de hashing segura)
     $hashed_password = md5($password);
@@ -36,3 +36,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Cerrar la conexión a la base de datos
 $cone->close();
 ?>
+
