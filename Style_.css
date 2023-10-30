@@ -4,12 +4,7 @@
     padding:0;
     font-family: 'Open Sans';
 }
-header{
-    background: url(https://th.bing.com/th/id/OIP.zv-6WGiM06XwaLZlEJ9ziQAAAA?w=294&h=32&c=7&r=0&o=5&pid=1.7.jpg);
-    background-size: cover;
-    background-position:center;
-    height: 300px;
-}
+
 header .logo{
     margin: 0;
     padding: 25px 30px;
