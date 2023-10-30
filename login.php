@@ -1,10 +1,9 @@
-
 <?php
 
 $host = "localhost"; // Cambia esto al host de tu base de datos
 $usuario = "root"; // Cambia esto a tu nombre de usuario de la base de datos
 $pass = ""; // Cambia esto a tu contraseña de la base de datos
-$db = "garaje "; 
+$db = "garaje";
 
 // Establecer conexión a la base de datos
 $cone = new mysqli($host, $usuario, $pass, $db);
@@ -16,19 +15,26 @@ if ($cone->connect_error) {
 
 // Recuperar datos del formulario de inicio de sesión
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST["email"];
-    $password = $_POST["contraseña"];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-    // Consulta SQL para verificar las credenciales
-    $consulta = "SELECT * FROM usuarios WHERE email = '$email' AND contraseña = '$password'";
+    $consulta = "SELECT * FROM usuarios WHERE email = '$email'";
     $resultado = $cone->query($consulta);
 
     if ($resultado->num_rows == 1) {
-        // Inicio de sesión exitoso, redireccionar a la página de inicio
-        header("Location: carrito.html");
+        $row = $resultado->fetch_assoc();
+        $stored_password = $row['password'];
+
+        if ($password == $stored_password) { // Comparamos sin hash
+            // Inicio de sesión exitoso, redireccionar a la página de inicio
+            header("Location:Carro.html");
+        } else {
+            // Credenciales incorrectas, mostrar un mensaje de error
+            echo "Credenciales incorrectas. Inténtalo de nuevo.";
+        }
     } else {
-        // Credenciales incorrectas, mostrar un mensaje de error
-        echo "Credenciales incorrectas. Inténtalo de nuevo.";
+        // Usuario no encontrado, mostrar un mensaje de error
+        echo "Usuario no encontrado. Inténtalo de nuevo.";
     }
 }
 
